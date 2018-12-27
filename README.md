@@ -6,5 +6,5 @@ A Tool for Within-Taxon Operational Taxonomic Unit (OTU) Diversity
 2) NCBI BLAST 2.6.0
 3) MAFFT 7.402
 
-Developed by: John Kevin Cava
+Developed by: John Kevin Cava <br />
 Principal Investigator: Huansheng Cao (Biodesign Center for Fundamental and Applied Microbiomics)
