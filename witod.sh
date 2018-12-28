@@ -11,6 +11,6 @@ module load ncbi-blast/2.6.0
 module load python/3.6.4                                                        
 module load mafft/7.402
 
-python OTU_Enhancer.py -input otu_table-r1_min1000_w_taxa.txt -out OTU_TABLE_FINAL -rep_set rep_set.fna -silva silva97rep -similarity 0.97 -column 20 -dir C20
-python OTU_Enhancer.py -input otu_table-r1_min1000_w_taxa.txt -out OTU_TABLE_FINAL -rep_set rep_set.fna -silva silva97rep -similarity 0.97 -column 21 -dir C21
-python OTU_Enhancer.py -input otu_table-r1_min1000_w_taxa.txt -out OTU_TABLE_FINAL -rep_set rep_set.fna -silva silva97rep -similarity 0.97 -column 22 -dir C22
+python witod.py -input otu_table-r1_min1000_w_taxa.txt -out OTU_TABLE_FINAL -rep_set rep_set.fna -silva silva97rep -similarity 0.97 -column 20 -dir C20
+python witod.py -input otu_table-r1_min1000_w_taxa.txt -out OTU_TABLE_FINAL -rep_set rep_set.fna -silva silva97rep -similarity 0.97 -column 21 -dir C21
+python witod.py -input otu_table-r1_min1000_w_taxa.txt -out OTU_TABLE_FINAL -rep_set rep_set.fna -silva silva97rep -similarity 0.97 -column 22 -dir C22
