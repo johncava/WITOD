@@ -8,9 +8,8 @@ parser.add_argument("-input",help= "Input OTU Table file name")
 parser.add_argument("-out", help= "Output OTU Table file name")                 
 parser.add_argument("-silva", help= "Silva Database name")                      
 parser.add_argument("-rep_set", help= "Rep Set Path")                           
-parser.add_argument("-dir",help="Output Directory")
+#parser.add_argument("-dir",help="Output Directory")
 parser.add_argument("-similarity", help="Silva Similarity Percentage")         
-#parser.add_argument("-column",help="Specific Column")
                                                                                 
 args = parser.parse_args()
 
@@ -41,7 +40,7 @@ for column in range(1,numColumns - 1):
                                                                                     
     os.chdir('./' + WORKING_DIRECTORY)                                                         
                                                                                     
-    os.system("python filter_v3.py " + args.rep_set + " " + args.input + " " + column)
+    os.system("python filter_v3.py " + args.rep_set + " " + args.input + " " + str(column))
     print('Stage 1 Complete')
     os.system("python -W ignore otu_filter_1.py")
     print('Stage 2 Complete')                                                
@@ -72,5 +71,7 @@ for column in range(1,numColumns - 1):
     os.system("mv otu_silva_v4.py ./../")                                                        
     os.system("mv final.py ./../")
     os.system("mv diversity_v2.py ./../")
+
+    os.chdir('./../')
 ###############
 print('Done')
