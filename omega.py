@@ -25,15 +25,15 @@ for s in samples_dict.keys():
         for line in f:
             line = line.split(',')
             if line[0] not in otu_dict:
-                otu_dict[line[0]] = (line[2],line[3],line[4].split('\n')[0])
+                otu_dict[line[0]] = (line[2],line[3],line[4])
             if line[0] not in samples_dict[s]:
                 samples_dict[s][line[0]] = line[1]
 
 sample_headers = samples_dict.keys()
 output_file_name = sys.argv[1]
 with open(output_file_name + '.txt','w') as w:
-    header = ['OTU ID'] + sample_headers + ['Taxa', 'Silva Taxa ID', 'Sequence']
-    w.write(header + '\n')
+    header = ['OTU ID'] + list(sample_headers) + ['Taxa', 'Silva Taxa ID', 'Sequence']
+    w.write(','.join(header) + '\n')
     for otu in otu_dict.keys():
         output_line = [otu]
         ra = []
@@ -42,6 +42,7 @@ with open(output_file_name + '.txt','w') as w:
                 ra.append(samples_dict[sa][otu])
             else:
                 ra.append(str(0.0))
-        output_line = output_line + ra + [otu[2],otu[1],otu[0]]
-        w.write(output_line + '\n')
+        item = otu_dict[otu]
+        output_line = output_line + ra + [item[2].split('\n')[0],item[1],item[0]]
+        w.write(','.join(output_line) + '\n')
             
