@@ -1,7 +1,9 @@
 import glob
 import numpy as np
+import sys
 
-file_ = glob.glob('OTU_TABLE_FINAL.txt')[0]
+#file_ = glob.glob('OTU_TABLE_FINAL.txt')[0]
+file_ =  sys.argv[1] + ".txt"
 
 header = ''
 dic = {}

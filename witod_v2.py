@@ -7,12 +7,12 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-input",help= "Input OTU Table file name")                 
 parser.add_argument("-out", help= "Output OTU Table file name")                 
 parser.add_argument("-silva", help= "Silva Database name")                      
-parser.add_argument("-rep_set", help= "Rep Set Path")                           
-#parser.add_argument("-dir",help="Output Directory")
+parser.add_argument("-rep_set", help= "Rep Set Path")
 parser.add_argument("-similarity", help="Silva Similarity Percentage")         
                                                                                 
 args = parser.parse_args()
 
+sample_otu_table_name = "SAMPLE_OTU_TABLE"
 otu_file = args.input
 numColumns = None
 samples = None
@@ -54,11 +54,11 @@ for column in range(1,numColumns - 1):
     print('Stage 6 Complete')                                                
     os.system("python blast.py " + args.silva)
     print('Stage 7 Complete')                                                                 
-    os.system("python otu_silva_v4.py " + args.out + " " + args.similarity)
+    os.system("python otu_silva_v4.py " + sample_otu_table_name + " " + args.similarity)
     print('Stage 8 Complete')                                                          
     os.system("python final.py")
     print('Stage 9 Complete')
-    os.system("python diversity_v2.py")
+    os.system("python diversity_v2.py " + sample_otu_table_name)
     print('Stage 10 Complete')                                                                 
                                                                                     
     os.system("mv filter_v3.py ./../")                                                           
@@ -74,5 +74,5 @@ for column in range(1,numColumns - 1):
 
     os.chdir('./../')
 ###############
-os.system('python omega.py')
+os.system("python omega.py " + args.out + " " + sample_otu_table_name)
 print('Done')
