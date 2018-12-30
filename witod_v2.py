@@ -74,4 +74,5 @@ for column in range(1,numColumns - 1):
 
     os.chdir('./../')
 ###############
+os.system('python omega.py')
 print('Done')
