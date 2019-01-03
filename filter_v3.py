@@ -1,6 +1,12 @@
 import glob                                                                     
 import sys
-                                                                                
+
+
+###
+# First script that takes the original OTU table and the rep_set.fna file to create *.fna files
+# associated with a specific taxon. 
+### 
+
 # Load rep_set.fna                                                              
 dic = {}                                                                        
 repset_file = sys.argv[1]
@@ -10,10 +16,8 @@ with open('./../' + repset_file,'r') as fn:
     for fna_file in fna_files:                                                  
         fna = fna_file.split('\n')                                              
         name, seq = fna[0].split(' ')[0], fna[1]                                
-        dic[name] = seq                                                         
-                                                                                
-#begin = 20
-#end = 23
+        dic[name] = seq
+
 otu_table_file = sys.argv[2]
 column = int(sys.argv[3])
 with open('./../'+otu_table_file, 'r') as f:
@@ -21,11 +25,9 @@ with open('./../'+otu_table_file, 'r') as f:
     for line in f:                                                              
         data.append(line.split('\t'))                                           
     # Remove headers                                                            
-    #data.pop(0)
     data.pop(0)
     # Retrieve column of interest                                               
     columns = data.pop(0)
-    #index_interest = columns.index('J-Lu-Wisconsin-060316-F5-R5')
     # Select Relative abundance, OTU ID, and Taxa based on column of interest   
     for index_interest in range(column, column + 1):
         subset = []

@@ -1,6 +1,10 @@
 import glob
 import os
 
+###
+# Creates the .mafft files from the .fna files outputted from the tool
+###
+
 files_ = glob.glob('*-combined-16S.silva.fna')
 
 for file_ in files_:

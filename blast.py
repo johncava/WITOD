@@ -2,6 +2,11 @@ import glob
 import os
 import sys
 
+###
+# For each *-combined.fna file, blastn the trimmed *-combined.fna files to retrieve
+# the associated silva taxon IDs for the sequences
+###
+
 silva_rep = sys.argv[1]
 files_ = glob.glob('*-combined.fna')
 num_threads = 8

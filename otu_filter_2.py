@@ -1,6 +1,10 @@
 import glob
 import os
 
+###
+# Moves all *-combined.fna files that only have one OTU to otu_filter_2 folder
+###
+
 os.system('mkdir otu_filter_2')
 files_ = glob.glob('*-combined.fna')
 for file_ in files_:

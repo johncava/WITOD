@@ -2,6 +2,10 @@ import glob
 import os
 import sys
 
+###
+# Creates the Final OTU Tabl from the sample OTU tables created
+###
+
 # Create file with the sample directories
 os.system('ls -d */ > sample_list.txt')
 

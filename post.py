@@ -1,6 +1,12 @@
 import glob
 import os
 import numpy as np
+
+###
+# Takes the *-intermediate.fna files and creates the *-final.fna files by checking the multiple alignment has two columns that
+# are identical flanking both ends of the multiple sequence alignment
+###
+
 files = glob.glob('*-intermediate.fna')                                                
                                                                                 
 for file_ in files:                                                             

@@ -1,5 +1,9 @@
 import glob
 
+###
+# Takes the *-final.fna files and combines identical sequences together
+###
+
 files = glob.glob('*-final.fna')
 
 for file_ in files:

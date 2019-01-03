@@ -2,6 +2,10 @@ import glob
 import os
 import sys
 
+###
+# Creates the sample OTU Table for each sample column of the original OTU table
+###
+
 files_ = glob.glob('*.blast')
 
 combined = glob.glob('*-combined.fna')

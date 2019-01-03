@@ -2,6 +2,11 @@ import glob
 import os
 import numpy as np
 
+###
+# Takes the *.fna files and conduct a multiple sequence alignment. From this multiple sequence alignment,
+# trim the multiple sequence alignment such that there are no gaps flanking each end of the alignments.
+###
+
 new_fna_files = glob.glob('*.fna')
 for n in new_fna_files:
     pre = n.split('.')[0]

@@ -2,7 +2,11 @@ import glob
 import numpy as np
 import sys
 
-#file_ = glob.glob('OTU_TABLE_FINAL.txt')[0]
+###
+# Takes the sample OTU table generated for each column of the original OTU table and 
+# calculates the within taxon diversity
+###
+
 file_ =  sys.argv[1] + ".txt"
 
 header = ''
