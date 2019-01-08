@@ -10,5 +10,4 @@
 module load python/3.6.4                                                        
 module load mafft/7.402
 
-python witod.py -input OTU_TABLE.txt -out SAMPLE_OTU_TABLE -rep_set rep_set.fna
-
+python benchmark.py -input OTU_TABLE.txt -out SAMPLE_OTU_TABLE -rep_set rep_set.fna

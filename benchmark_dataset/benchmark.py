@@ -3,8 +3,7 @@ import os
 import glob
 
 ###
-# All python scripts called in this script are done in accordance for a specific column (sample) from the original OTU Table.
-# This is in order to segregate and make sure that sequences associated in one sample aren't considered in another sample if it isn't there.
+# Benchmark script to tes tthe fundamental portion of the tool i.e trimming and alignment from OTU Table
 ###
 
 parser = argparse.ArgumentParser()                                              
@@ -36,11 +35,9 @@ for column in range(1,numColumns - 1):
     os.system("mv post.py "+ WORKING_DIRECTORY)                                                 
     os.system("mv otu_v1.py "+ WORKING_DIRECTORY)                                               
     os.system("mv otu_filter_2.py "+ WORKING_DIRECTORY)                                         
-    os.system("mv blast.py " + WORKING_DIRECTORY)                                                
-    os.system("mv otu_silva_v4.py "+ WORKING_DIRECTORY)                                         
-    os.system("mv final.py "+ WORKING_DIRECTORY)
-    os.system("mv diversity_v2.py "+ WORKING_DIRECTORY)
-                                                                                    
+    os.system("mv blast.py " + WORKING_DIRECTORY)
+    os.system("mv checker.py " + WORKING_DIRECTORY)
+
     os.chdir('./' + WORKING_DIRECTORY)                                                         
                                                                                     
     os.system("python filter_v3.py " + args.rep_set + " " + args.input + " " + str(column))
@@ -54,7 +51,8 @@ for column in range(1,numColumns - 1):
     os.system("python otu_v1.py")
     print('Stage 5 Complete')                                                                
     os.system("python -W ignore otu_filter_2.py")
-    print('Stage 6 Complete')                                                                                                                 
+    print('Stage 6 Complete')
+    os.system("python checker.py")                                                                                                                 
                                                                                     
     os.system("mv filter_v3.py ./../")                                                           
     os.system("mv otu_filter_1.py ./../")                                                        
@@ -62,7 +60,8 @@ for column in range(1,numColumns - 1):
     os.system("mv post.py ./../")                                                                
     os.system("mv otu_v1.py ./../")                                                              
     os.system("mv otu_filter_2.py ./../")                                                        
-
+    os.system("mv checker.py ./../")
+    
     os.chdir('./../')
 
 print('Done')

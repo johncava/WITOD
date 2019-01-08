@@ -86,9 +86,9 @@ for taxa in range(1,Max_Taxa + 1):
 
 # Write benchmark to summary benchmark txt
 with open('benchmark_summary.txt','w') as w:
-    w.write('Taxa Name' + '\t' + 'Number Of OTUs')
+    w.write('Taxa Name' + '\t' + 'Number Of OTUs\n')
     for item in b_summary:
-        w.write(item[0] + '\t' + str(item[1]))
+        w.write(item[0] + '\t' + str(item[1]) + '\n')
 
 # Write OTU Sequences to rep_set.fna
 with open(rep_set_file,'w') as rep_write:
