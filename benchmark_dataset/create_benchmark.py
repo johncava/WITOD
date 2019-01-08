@@ -98,7 +98,7 @@ with open(rep_set_file,'w') as rep_write:
 
 # Write OTU Table
 with open(otu_table_file,'w') as otu_write:
-    sample_headers = [str('Sample ' + str(x)) for x in range(1,Max_Sample + 1)]
+    sample_headers = [str('Sample' + str(x)) for x in range(1,Max_Sample + 1)]
     header = ['OTU ID'] + sample_headers + ['Taxa']
     header = '\t'.join(header)
     otu_write.write(header + '\n')

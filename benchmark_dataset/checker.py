@@ -18,7 +18,7 @@ for file_ in files:
     taxa_summary.append((file_name, numOTUs))
 
 # Write taxa otu summary for sample
-with open('taxa-test.txt') as w:
+with open('taxa-test.txt','w') as w:
     w.write('Taxa Name' + '\t' + 'Number Of OTUs\n')
     for item in taxa_summary:
         w.write(item[0] + '\t' + item[1] + '\n')
