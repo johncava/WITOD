@@ -62,6 +62,11 @@ for column in range(1,numColumns - 1):
     os.system("mv otu_filter_2.py ./../")                                                        
     os.system("mv checker.py ./../")
     
+    # Grab Taxa OTU Number Summary File
+    s = glob.glob('*-taxa-count.txt')[0]
+    os.system('mv ' + s + ' ./../')
+
     os.chdir('./../')
 
+#TODO: Combine Taxa Summary Counts
 print('Done')

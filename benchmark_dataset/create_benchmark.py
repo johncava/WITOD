@@ -52,7 +52,7 @@ def postmutate(s):
     return s
 
 # Create Taxa Name
-taxa_dic = {1: 'k', 2: 'p', 3:'c', 4:'o', 5:'f', 6:'g', 7:'g'}
+taxa_dic = {1: 'k', 2: 'p', 3:'c', 4:'o', 5:'f', 6:'g', 7:'s'}
 def create_taxa():
     length = random.choice(range(3,8))
     taxa_name = ';'.join([taxa_dic[i + 1] + '_' + ''.join([random.choice(string.ascii_uppercase + string.digits) for _ in range(4)]) for i in range(length)])
@@ -81,13 +81,21 @@ for taxa in range(1,Max_Taxa + 1):
         fna_sequences.append(('OTU' + str(((taxa - 1)*Max_OTU) + otu), seq_copy))
         s = []
         for sample in range(1, Max_Sample + 1):
-            s.append(str(int(random.random()*1000)))
+            s.append(str(int((random.random()*1000) + 1)))
         otu_table.append(['OTU' + str(((taxa - 1)*Max_OTU) + otu)] + s + [taxa_name])
 
 # Write benchmark to summary benchmark txt
 with open('benchmark_summary.txt','w') as w:
     w.write('Taxa Name' + '\t' + 'Number Of OTUs\n')
     for item in b_summary:
+        w.write(item[0] + '\t' + str(item[1]) + '\n')
+
+# Write expected benchmark
+with open('benchmark_expected.txt', 'w') as w:
+    w.write('Taxa Name' + '\t' + 'Number Of OTUs\n')
+    for item in b_summary:
+        if item[1] <= 1:
+            continue
         w.write(item[0] + '\t' + str(item[1]) + '\n')
 
 # Write OTU Sequences to rep_set.fna
