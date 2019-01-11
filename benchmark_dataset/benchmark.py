@@ -34,8 +34,7 @@ for column in range(1,numColumns - 1):
     os.system("mv script_v6.py "+ WORKING_DIRECTORY)                                            
     os.system("mv post.py "+ WORKING_DIRECTORY)                                                 
     os.system("mv otu_v1.py "+ WORKING_DIRECTORY)                                               
-    os.system("mv otu_filter_2.py "+ WORKING_DIRECTORY)                                         
-    os.system("mv blast.py " + WORKING_DIRECTORY)
+    os.system("mv otu_filter_2.py "+ WORKING_DIRECTORY)
     os.system("mv checker.py " + WORKING_DIRECTORY)
 
     os.chdir('./' + WORKING_DIRECTORY)                                                         
@@ -52,7 +51,7 @@ for column in range(1,numColumns - 1):
     print('Stage 5 Complete')                                                                
     os.system("python -W ignore otu_filter_2.py")
     print('Stage 6 Complete')
-    os.system("python checker.py")                                                                                                                 
+    os.system("python checker.py " + samples[column])                                                                                                                 
                                                                                     
     os.system("mv filter_v3.py ./../")                                                           
     os.system("mv otu_filter_1.py ./../")                                                        
