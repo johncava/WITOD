@@ -54,7 +54,7 @@ for column in range(1,numColumns - 1):
     os.system("python checker.py " + samples[column])                                                                                                                 
                                                                                     
     os.system("mv filter_v3.py ./../")                                                           
-    oqs.system("mv otu_filter_1.py ./../")                                                        
+    os.system("mv otu_filter_1.py ./../")                                                        
     os.system("mv script_v6.py ./../")                                                           
     os.system("mv post.py ./../")                                                                
     os.system("mv otu_v1.py ./../")                                                              
