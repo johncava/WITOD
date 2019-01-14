@@ -47,14 +47,14 @@ for column in range(1,numColumns - 1):
     print('Stage 3 Complete')                                                             
     os.system("python post.py")
     print('Stage 4 Complete')                                                                  
-    os.system("python otu_v1.py")
-    print('Stage 5 Complete')                                                                
-    os.system("python -W ignore otu_filter_2.py")
-    print('Stage 6 Complete')
+    #os.system("python otu_v1.py")
+    #print('Stage 5 Complete')                                                                
+    #os.system("python -W ignore otu_filter_2.py")
+    #print('Stage 6 Complete')
     os.system("python checker.py " + samples[column])                                                                                                                 
                                                                                     
     os.system("mv filter_v3.py ./../")                                                           
-    os.system("mv otu_filter_1.py ./../")                                                        
+    oqs.system("mv otu_filter_1.py ./../")                                                        
     os.system("mv script_v6.py ./../")                                                           
     os.system("mv post.py ./../")                                                                
     os.system("mv otu_v1.py ./../")                                                              
@@ -67,5 +67,6 @@ for column in range(1,numColumns - 1):
 
     os.chdir('./../')
 
-#TODO: Combine Taxa Summary Counts
+# Combine Taxa Summary Counts
+os.system('python final-checker.py')
 print('Done')
