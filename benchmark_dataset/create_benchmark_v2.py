@@ -1,6 +1,6 @@
 import random
 import string
-import numpy
+import numpy as np
 
 Max_Taxa = 300
 Max_OTU = 30
@@ -48,7 +48,7 @@ def mutate(seq, nOTUs):
             elif flank == 1:
                 seq_matrix[i] = s + random.choice(nucleotides)
 
-    expected = Max_OTU - num_combine + 1
+    expected = nOTUs - num_combine + 1
     return seq_matrix, expected
 
 # Create Taxa Name
@@ -68,12 +68,12 @@ for taxa in range(1,Max_Taxa + 1):
     # Randomly choose number of OTUs
     numberOTUs = random.choice(range(7,Max_OTU + 1))
     # Create sequence
-    seq = ''.join(random.choice(nucleotides) for _ in range(seq_length))
+    seq = [random.choice(nucleotides) for _ in range(seq_length)]
     seq_list, expected = mutate(seq,numberOTUs)
     # Add taxa and number of OTUs to benchmark summary
     b_summary.append((taxa_name,numberOTUs,expected))
     for i, otu in enumerate(seq_list):
-        fna_sequences.append(('OTU' + str(((taxa - 1)*Max_OTU) + i), seq_copy))
+        fna_sequences.append(('OTU' + str(((taxa - 1)*Max_OTU) + i), otu))
         s = []
         for sample in range(1, Max_Sample + 1):
             s.append(str(int((random.random()*1000) + 1)))
