@@ -18,6 +18,7 @@ nucleotides = ['A','G','T','C']
 
 # Mutation Function
 def mutate(seq, nOTUs):
+    seq_matrix = []
     for n in range(nOTUs):
         seq_matrix.append(seq)
     seq_matrix = np.matrix(seq_matrix)
