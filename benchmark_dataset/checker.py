@@ -2,7 +2,7 @@ import glob
 import sys
 
 # Take all taxa .fna files
-files = glob.glob('*-final.fna')
+files = glob.glob('*-combined.fna')
 
 # Count OTUs per Taxa
 taxa_summary = []
