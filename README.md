@@ -1,7 +1,7 @@
 # WITOD
 A Tool for Within-Taxon Operational Taxonomic Unit (OTU) Diversity
 
-![alt text](https://raw.githubusercontent.com/johncava/WITOD/master/WITOD.png)
+![alt text](https://github.com/johncava/WITOD/blob/master/OTU_Image.png)
 
 # Requirements
 1) Python 3.6.4 
