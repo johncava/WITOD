@@ -1,7 +1,7 @@
 #!/bin/bash                                                                     
                                                                                 
 #SBATCH -n 16                        # number of cores                           
-#SBATCH -t 2-12:00                  # wall time (D-HH:MM)                       
+#SBATCH -t 0-02:00                  # wall time (D-HH:MM)                       
 #SBATCH -o slurm.%j.out             # STDOUT (%j = JobId)                       
 #SBATCH -e slurm.%j.err             # STDERR (%j = JobId)                       
 #SBATCH --mail-type=ALL             # Send a notification when the job starts, stops, or fails
