@@ -5,7 +5,7 @@ with open('benchmark_expected.txt','r') as expect:
     expect.readline()
     for line in expect:
         line = line.split('\n')[0].split('\t')
-        taxa[line[0]] = line[1]
+        taxa[line[0]] = (line[1],line[2])
 
 sample_files = glob.glob('*-taxa-count.txt')
 
@@ -16,7 +16,7 @@ for sample in sample_files:
         s.readline()
         for line in s:
             line = line.split('\n')[0].split('\t')
-            tn = line[0].split('-final')[0]
+            tn = line[0].split('-combined')[0]
             #tn = tn.split(';')
             #tn = '_'.join(tn)
             #print(tn)
@@ -35,11 +35,11 @@ for t in taxa.keys():
             l.append('N/A')
             continue
         l.append(str(sample_dic[sample_][k]))
-    l = [t] + [str(taxa[t])] + l
+    l = [t] + [str(taxa[t][0]),str(taxa[t][1])] + l
     final.append('\t'.join(l))
 
 with open('benchmark_validation.txt','w') as validation:
-    header = ['Taxa'] + ['Expected'] + list(sample_dic.keys())
+    header = ['Taxa'] + ['Starting nOTUs'] +['Expected'] + list(sample_dic.keys())
     header = '\t'.join(header)
     validation.write(header + '\n')
     for f in final:

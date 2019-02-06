@@ -1,10 +1,9 @@
 import random
 import string
+import numpy as np
 
-Max_Taxa = 800
-Max_OTU = 120
-Max_Mutations = 10
-Max_Post_Mutations = 10
+Max_Taxa = 300
+Max_OTU = 30
 Max_Sample = 3
 seq_length = 200
 
@@ -18,38 +17,39 @@ otu_table_file = 'OTU_TABLE.txt'
 nucleotides = ['A','G','T','C']
 
 # Mutation Function
-def mutate(s):
-    new_s = ''
-    index = None
-    n = None
-    # Pick Mutation
-    m_type = int(random.random()*4)
-    if m_type == 0:
-        index = random.choice(range(2,len(s)-2))
-        new_s = s[:index] + s[index:]
-    if m_type == 1:
-        index = random.choice(range(2,len(s)-2))
-        n = random.choice(nucleotides)
-        new_s = s[:index] + str(n) + s[index:]
-    if m_type == 2:
-        index = random.choice(range(2,len(s)-2))
-        new_s = s[:index] + random.choice(nucleotides) + s[index+1:]
-    if m_type == 3:
-        index = random.choice(range(2,len(s)-2))
-        new_s = s[:index] + random.choice(nucleotides) + s[index+1:]
-    return new_s
+def mutate(seq, nOTUs):
+    seq_matrix = []
+    for n in range(nOTUs):
+        seq_matrix.append(seq)
+    seq_matrix = np.matrix(seq_matrix)
 
-def postmutate(s):
-    n = None
-    # Pick Mutation
-    m_type = int(random.random()*5)
-    if m_type == 0:
-        n = random.choice(nucleotides)
-        s = str(n) + s
-    if m_type == 1:
-        n = random.choice(nucleotides)
-        s = s + str(n)
-    return s
+    num_combine = random.choice([1,2,3,4,5])
+    mutate = nucleotides.copy()
+    mutate.remove(seq[2])
+    combined_nucleotide = random.choice(mutate)
+    seq_matrix[:num_combine,2] = combined_nucleotide
+    k = 3
+    for i in range(num_combine,nOTUs):
+        mutate = nucleotides.copy()
+        mutate.remove(seq[k])
+        seq_matrix[i,k] = random.choice(mutate)
+        k += 1
+
+    seq_matrix = seq_matrix.tolist()
+    for i,v in enumerate(seq_matrix):
+        seq_matrix[i] = ''.join(v)
+
+    # Add nucleotides to each sequence to mimic gaps
+    for i,s in enumerate(seq_matrix):
+        for _ in range(random.choice([0,1,2,3,4,5])):
+            flank = random.choice([0,1])
+            if flank == 0:
+                seq_matrix[i] = random.choice(nucleotides) + s
+            elif flank == 1:
+                seq_matrix[i] = s + random.choice(nucleotides)
+
+    expected = nOTUs - num_combine + 1
+    return seq_matrix, expected
 
 # Create Taxa Name
 taxa_dic = {1: 'k', 2: 'p', 3:'c', 4:'o', 5:'f', 6:'g', 7:'s'}
@@ -66,37 +66,32 @@ for taxa in range(1,Max_Taxa + 1):
     # Create Taxa Name
     taxa_name = create_taxa()
     # Randomly choose number of OTUs
-    numberOTUs = random.choice(range(1,Max_OTU + 1))
-    # Add taxa and number of OTUs to benchmark summary
-    b_summary.append((taxa_name,numberOTUs))
+    numberOTUs = random.choice(range(7,Max_OTU + 1))
     # Create sequence
-    seq = ''.join(random.choice(nucleotides) for _ in range(seq_length))
-    for otu in range(1,numberOTUs):
-        # Mutate Sequence
-        seq_copy = seq
-        for _ in range(Max_Mutations):
-            seq_copy = mutate(seq_copy)
-        for _ in range(Max_Post_Mutations):
-            seq_copy = postmutate(seq_copy)
-        fna_sequences.append(('OTU' + str(((taxa - 1)*Max_OTU) + otu), seq_copy))
+    seq = [random.choice(nucleotides) for _ in range(seq_length)]
+    seq_list, expected = mutate(seq,numberOTUs)
+    # Add taxa and number of OTUs to benchmark summary
+    b_summary.append((taxa_name,numberOTUs,expected))
+    for i, otu in enumerate(seq_list):
+        fna_sequences.append(('OTU' + str(((taxa - 1)*Max_OTU) + i), otu))
         s = []
         for sample in range(1, Max_Sample + 1):
             s.append(str(int((random.random()*1000) + 1)))
-        otu_table.append(['OTU' + str(((taxa - 1)*Max_OTU) + otu)] + s + [taxa_name])
+        otu_table.append(['OTU' + str(((taxa - 1)*Max_OTU) + i)] + s + [taxa_name])
 
 # Write benchmark to summary benchmark txt
 with open('benchmark_summary.txt','w') as w:
-    w.write('Taxa Name' + '\t' + 'Number Of OTUs\n')
+    w.write('Taxa Name' + '\t' + 'Number Of OTUs'+ '\t' + 'Expected' + '\n')
     for item in b_summary:
-        w.write(item[0] + '\t' + str(item[1]) + '\n')
+        w.write(item[0] + '\t' + str(item[1]) + '\t' + str(item[2]) + '\n')
 
 # Write expected benchmark
 with open('benchmark_expected.txt', 'w') as w:
-    w.write('Taxa Name' + '\t' + 'Number Of OTUs\n')
+    w.write('Taxa Name' + '\t' + 'Number Of OTUs' + '\t' + 'Expected' +'\n')
     for item in b_summary:
         if item[1] <= 1:
             continue
-        w.write(item[0] + '\t' + str(item[1]) + '\n')
+        w.write(item[0] + '\t' + str(item[1]) + '\t' + str(item[2]) + '\n')
 
 # Write OTU Sequences to rep_set.fna
 with open(rep_set_file,'w') as rep_write:
