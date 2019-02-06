@@ -42,7 +42,7 @@ for column in range(1,numColumns - 1):
     os.system("mv otu_silva_v4.py "+ WORKING_DIRECTORY)                                         
     os.system("mv final.py "+ WORKING_DIRECTORY)
     os.system("mv diversity_v2.py "+ WORKING_DIRECTORY)
-                                                                                    
+                                         
     os.chdir('./' + WORKING_DIRECTORY)                                                         
                                                                                     
     os.system("python filter_v3.py " + args.rep_set + " " + args.input + " " + str(column))
@@ -64,8 +64,8 @@ for column in range(1,numColumns - 1):
     os.system("python final.py")
     print('Stage 9 Complete')
     os.system("python diversity_v2.py " + sample_otu_table_name)
-    print('Stage 10 Complete')                                                                 
-                                                                                    
+    print('Stage 10 Complete')
+
     os.system("mv filter_v3.py ./../")                                                           
     os.system("mv otu_filter_1.py ./../")                                                        
     os.system("mv script_v6.py ./../")                                                           
@@ -80,4 +80,5 @@ for column in range(1,numColumns - 1):
     os.chdir('./../')
 ###############
 os.system("python omega.py " + args.out + " " + sample_otu_table_name)
+os.system("python diversity-overview.py " + "FINAL_SAMPLE_DIVERSITY " + "OTU_DIVERSITY")
 print('Done')
