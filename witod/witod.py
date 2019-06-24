@@ -39,6 +39,9 @@ os.system("mv ./util/diversity_v2.py ./")
 ##########
 # For Loop for each Sample
 for column in range(1,2):
+    
+    print('--------------')
+    print(samples[column])
 
     WORKING_DIRECTORY="./" + samples[column]
                                                                                     
@@ -56,11 +59,11 @@ for column in range(1,2):
                                          
     os.chdir('./' + WORKING_DIRECTORY)                                                         
                                                                                     
-    os.system("python3 filter_v3.py " + args.rep_set + " " + args.input + " " + str(column))
+    os.system("python3 -W ignore filter_v3.py " + args.rep_set + " " + args.input + " " + str(column))
     print('Stage 1 Complete')
-    os.system("python3 -W ignore otu_filter_1.py")
+    #os.system("python3 -W ignore otu_filter_1.py")
     print('Stage 2 Complete')                                                
-    os.system("python3 script_v6.py")
+    os.system("python3 -W ignore script_v6.py")
     print('Stage 3 Complete')                                                             
     os.system("python3 post.py")
     print('Stage 4 Complete')                                                                  
@@ -68,7 +71,7 @@ for column in range(1,2):
     print('Stage 5 Complete')                                                                
     os.system("python3 -W ignore otu_filter_2.py")
     print('Stage 6 Complete')                                                
-    os.system("python3 blast.py " + args.silva + " " + args.n)
+    os.system("python3 -W ignore blast.py " + args.silva + " " + args.n)
     print('Stage 7 Complete')                                                                 
     os.system("python3 otu_silva_v4.py " + sample_otu_table_name + " " + args.similarity)
     print('Stage 8 Complete')                                                          
@@ -92,9 +95,12 @@ for column in range(1,2):
 
 ###############
 os.system("mv ./util/omega.py ./")
-os.system("mv ./utildiversity-overview.py ./")
+os.system("mv ./util/diversity-overview.py ./")
 os.system("mv ./util/calculate-slope.py ./")
 os.system("python3 omega.py " + args.out + " " + sample_otu_table_name)
 os.system("python3 diversity-overview.py " + "FINAL_SAMPLE_DIVERSITY " + "OTU_DIVERSITY")
 os.system('python3 calculate-slope.py')
+os.system("mv *.py util/")
+os.system("mv util/witod.py ./")
+os.system("rm sample_list.txt")
 print('Done')
