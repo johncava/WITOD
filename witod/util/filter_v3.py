@@ -10,7 +10,7 @@ import sys
 # Load rep_set.fna                                                              
 dic = {}                                                                        
 repset_file = sys.argv[1]
-with open('./../' + repset_file,'r') as fn:
+with open('./' + repset_file,'r') as fn:
     fna_files = fn.read()                                                       
     fna_files = fna_files.split('>')[1:]                                        
     for fna_file in fna_files:                                                  
@@ -20,7 +20,7 @@ with open('./../' + repset_file,'r') as fn:
 
 otu_table_file = sys.argv[2]
 column = int(sys.argv[3])
-with open('./../'+otu_table_file, 'r') as f:
+with open('./'+otu_table_file, 'r') as f:
     data = []
     for line in f:                                                              
         data.append(line.split('\t'))                                           
@@ -53,7 +53,7 @@ with open('./../'+otu_table_file, 'r') as f:
             # If taxa information is only Kingdom and Phylum
             if len(taxa) <= 2:
                 continue
-            taxa_set.append('_'.join(taxa))
+            taxa_set.append('_'.join(taxa).replace(' ','-'))
             new_id = f[0]
             if 'New.Reference' in new_id:
                 new_id = new_id.split('New.Reference')[-1]
