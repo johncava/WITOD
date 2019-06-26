@@ -38,7 +38,7 @@ os.system("mv ./util/diversity_v2.py ./")
 
 ##########
 # For Loop for each Sample
-for column in range(1,2):
+for column in range(1,numColumns - 1):
     
     print('--------------')
     print(samples[column])
@@ -61,7 +61,7 @@ for column in range(1,2):
                                                                                     
     os.system("python3 -W ignore filter_v3.py " + args.rep_set + " " + args.input + " " + str(column))
     print('Stage 1 Complete')
-    #os.system("python3 -W ignore otu_filter_1.py")
+    os.system("python3 -W ignore otu_filter_1.py")
     print('Stage 2 Complete')                                                
     os.system("python3 -W ignore script_v6.py")
     print('Stage 3 Complete')                                                             
@@ -90,6 +90,12 @@ for column in range(1,2):
     os.system("mv otu_silva_v4.py ./../")                                                        
     os.system("mv final.py ./../")
     os.system("mv diversity_v2.py ./../")
+
+    os.system("rm *.fna")
+    os.system("rm *.mafft")
+    os.system("rm *.blast")
+    os.system("rm -r otu_filter_1/")
+    os.system("rm -r otu_filter_2/")
 
     os.chdir('./../')
 
